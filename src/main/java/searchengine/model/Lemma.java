@@ -1,17 +1,17 @@
 package searchengine.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Lemma {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
-    private int siteId;
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Site site;
+    @Column(nullable = false)
     private String lemma;
+    @Column(nullable = false)
     private int frequency;
 
 }
