@@ -6,7 +6,7 @@ import java.util.Date;
 @Entity
 public class Site {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "ENUM('INDEXING, INDEXED, FAILED')", unique=true, nullable=false)
