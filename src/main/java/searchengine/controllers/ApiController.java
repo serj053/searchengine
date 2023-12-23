@@ -21,4 +21,8 @@ public class ApiController {
     public ResponseEntity<StatisticsResponse> statistics() {
         return ResponseEntity.ok(statisticsService.getStatistics());
     }
+    @GetMapping("/startIndexing")
+    public String startIndexing(){
+        return "start indexing";
+    }
 }

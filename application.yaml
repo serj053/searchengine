@@ -7,6 +7,8 @@ indexing-settings:
     - url: https://www.playback.ru
       name: PlayBack.Ru
 
+someParameter: 3322
+
 server:
   port: 8080
 
