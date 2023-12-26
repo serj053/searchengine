@@ -4,10 +4,10 @@ import org.springframework.stereotype.Service;
 import searchengine.repositories.PageRepositories;
 
 @Service
-public class AddPage {
+public class PageService {
     private final PageRepositories pageRepositories;
 
-    public AddPage(PageRepositories pageRepositories) {
+    public PageService(PageRepositories pageRepositories) {
         this.pageRepositories = pageRepositories;
     }
 

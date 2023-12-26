@@ -60,6 +60,9 @@ public class Site {
         this.name = name;
     }
 
+    public Site() {
+    }
+
     public Site(Status status, Date statusTime, String lastError, String url, String name) {
         this.status = status;
         this.statusTime = statusTime;
