@@ -11,6 +11,14 @@ public class Page {
     // @Column(name="site_id", nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)
     private Site site;
+
+    public Page(Site site, String path, int code, String content) {
+        this.site = site;
+        this.path = path;
+        this.code = code;
+        this.content = content;
+    }
+
     @Column(nullable = false)
     private String path;
     @Column(nullable = false)
