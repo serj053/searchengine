@@ -34,12 +34,19 @@ public class ApiController {
         return startIndexing.indexing();
     }
 
+    @GetMapping("siteId/{id}")
+    public Site getSite(@PathVariable Integer id) {
+
+        return siteService.getSite(id);
+    }
+
     @PostMapping("/addSite")
     public void add(@RequestBody Site site) {
-        siteService.addSite(site);
+        siteService.addSite();
     }
+
     @DeleteMapping("/del/{siteId}")
-    public void deleteById(@PathVariable Integer siteId){
+    public void deleteById(@PathVariable Integer siteId) {
         siteService.deleteSiteById(siteId);
     }
 }
