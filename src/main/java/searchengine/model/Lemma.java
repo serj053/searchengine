@@ -8,7 +8,7 @@ public class Lemma {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     @ManyToOne(cascade=CascadeType.ALL)
-    private Site site;
+    private SiteDB site;
     @Column(nullable = false)
     private String lemma;
     @Column(nullable = false)

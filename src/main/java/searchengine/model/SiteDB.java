@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Site {
+public class SiteDB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,6 +15,15 @@ public class Site {
     @Column(nullable = false)
     private Date statusTime;
     private String lastError;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Column(nullable = false)
     private String url;
     @Column(nullable = false)
@@ -60,10 +69,10 @@ public class Site {
         this.name = name;
     }
 
-    public Site() {
+    public SiteDB() {
     }
 
-    public Site(Status status, Date statusTime, String lastError, String url, String name) {
+    public SiteDB(Status status, Date statusTime, String lastError, String url, String name) {
         this.status = status;
         this.statusTime = statusTime;
         this.lastError = lastError;

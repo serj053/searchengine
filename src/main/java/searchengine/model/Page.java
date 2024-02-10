@@ -9,20 +9,23 @@ public class Page {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     // @Column(name="site_id", nullable = false)
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Site site;
+    @ManyToOne(cascade = CascadeType.ALL )
+    //@JoinColumn(name= "id" )
+    private SiteDB site;
+    @Column(nullable = false)
+    private String path;
+    @Column(nullable = false)
+    private int code;
+    @Column(nullable = false)
+    private String content;
 
-    public Page(Site site, String path, int code, String content) {
+    public Page(SiteDB site, String path, int code, String content) {
         this.site = site;
         this.path = path;
         this.code = code;
         this.content = content;
     }
 
-    @Column(nullable = false)
-    private String path;
-    @Column(nullable = false)
-    private int code;
 
     public int getId() {
         return id;
@@ -32,11 +35,11 @@ public class Page {
         this.id = id;
     }
 
-    public Site getSite() {
+    public SiteDB getSite() {
         return site;
     }
 
-    public void setSite(Site site) {
+    public void setSite(SiteDB site) {
         this.site = site;
     }
 
@@ -64,6 +67,4 @@ public class Page {
         this.content = content;
     }
 
-    @Column(nullable = false)
-    private String content;
 }

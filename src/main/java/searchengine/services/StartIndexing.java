@@ -2,15 +2,20 @@ package searchengine.services;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import searchengine.config.Site;
+import searchengine.model.Page;
+import searchengine.model.SiteDB;
 import searchengine.repositories.PageRepositories;
 import searchengine.repositories.SiteRepositories;
+import searchengine.workingWithSite.SiteCrawl;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+
+import static searchengine.model.Status.INDEXING;
 
 @Getter
 @Setter
@@ -27,11 +32,17 @@ public class StartIndexing {
     }
 
 
-    public List indexing() {
-        for (Site site : sites) {
-            /*обходим все страницы сайта и добавляем все адреса в базу Page*/
-            System.out.println(site.getName());
-        }
+    public List indexing() throws IOException {
+        String[] result = SiteCrawl.connect(sites.get(2).getUrl());
+        SiteDB st = new SiteDB(INDEXING, new Date(), "noError", "Url", "Name");
+        SiteDB sdb = siteRepositories.save(st);
+        int id = sdb.getId();
+        Page page =new Page(st,result[0], 3,result[1]);
+        pageRepositories.save(page);
+//        for (Site site : sites) {
+//            /*обходим все страницы сайта и добавляем все адреса в базу Page*/
+//            System.out.println(site.getName());
+//        }
         return sites;
     }
 }

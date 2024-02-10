@@ -1,7 +1,7 @@
 package searchengine.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import searchengine.model.Site;
+import searchengine.model.SiteDB;
 
-public interface SiteRepositories extends JpaRepository<Site, Integer> {
+public interface SiteRepositories extends JpaRepository<SiteDB, Integer> {
 }

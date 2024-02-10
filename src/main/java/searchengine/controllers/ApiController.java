@@ -1,13 +1,15 @@
 package searchengine.controllers;
 
+import org.jboss.logging.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import searchengine.dto.statistics.StatisticsResponse;
-import searchengine.model.Site;
+import searchengine.model.SiteDB;
 import searchengine.services.SiteService;
 import searchengine.services.StartIndexing;
 import searchengine.services.StatisticsService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -30,19 +32,20 @@ public class ApiController {
     }
 
     @GetMapping("/startIndexing")
-    public List startIndexing() {
+    public List startIndexing() throws IOException {
         return startIndexing.indexing();
     }
 
     @GetMapping("siteId/{id}")
-    public Site getSite(@PathVariable Integer id) {
+    public SiteDB getSite(@PathVariable Integer id) {
 
         return siteService.getSite(id);
     }
 
     @PostMapping("/addSite")
-    public void add(@RequestBody Site site) {
-        siteService.addSite();
+    public void add(@RequestBody SiteDB site) {
+        siteService.addSite(site);
+        Logger.getLogger(ApiController.class.getName()).info("** site -" + site);
     }
 
     @DeleteMapping("/del/{siteId}")
