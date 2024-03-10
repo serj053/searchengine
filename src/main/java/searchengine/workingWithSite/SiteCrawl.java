@@ -12,7 +12,7 @@ public class SiteCrawl {
         // http://tinkoff-bank-4882.mypublideal.com/online
         //
         //String url = "https://lenta.ru/";
-        String[] site = new String[2];
+        String[] site = new String[3];
         Document doc = Jsoup.connect(url).ignoreHttpErrors(true).get();
         Document doc2 = null;
         String url2 = null;
@@ -47,14 +47,23 @@ public class SiteCrawl {
         site[0] = url2;
         assert doc2 != null;
         site[1] = doc2.text();
+        site[2] = doc.title();
         System.out.println(site[1].length());
         return site;
     }
 
     public static void main(String[] args) throws IOException {
-        String[] arr = SiteCrawl.connect("https://www.playback.ru");
-        System.out.println(arr[0]);
+        String[] arr = SiteCrawl.connect("https://lenta.ru/");
+        System.out.println("0 - " + arr[0]);
         System.out.println();
-        System.out.println(arr[1]);
+        System.out.println("1 - " + arr[1]);
+        System.out.println();
+        System.out.println("2 - " + arr[2]);
     }
 }
+/*
+* https://lenta.ru/
+* https://www.playback.ru
+* https://www.skillbox.ru
+*
+* */
