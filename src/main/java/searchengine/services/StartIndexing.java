@@ -9,7 +9,7 @@ import searchengine.model.Page;
 import searchengine.model.SiteDB;
 import searchengine.repositories.PageRepositories;
 import searchengine.repositories.SiteRepositories;
-import searchengine.workingWithSite.SiteCrawl;
+import searchengine.workingWithSite.SiteReading;
 
 import java.io.IOException;
 import java.util.Date;
@@ -33,7 +33,7 @@ public class StartIndexing {
 
 
     public List indexing() throws IOException {
-        String[] result = SiteCrawl.connect(sites.get(2).getUrl());
+        String[] result = SiteReading.connect(sites.get(2).getUrl());
         SiteDB st = new SiteDB(INDEXING, new Date(), "noError", "Url", "Name");
         SiteDB sdb = siteRepositories.save(st);
         int id = sdb.getId();

@@ -1,2 +1,4 @@
-package searchengine.workingWithSite;public class DataBaseInsertion {
+package searchengine.workingWithSite;
+
+public class DataBaseInsertion {
 }

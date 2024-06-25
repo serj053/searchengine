@@ -7,7 +7,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
-public class SiteCrawl {
+public class SiteReading {
     public static String[] connect(String url) throws IOException {
         // http://tinkoff-bank-4882.mypublideal.com/online
         //
@@ -53,7 +53,7 @@ public class SiteCrawl {
     }
 
     public static void main(String[] args) throws IOException {
-        String[] arr = SiteCrawl.connect("https://lenta.ru/");
+        String[] arr = SiteReading.connect("https://lenta.ru/");
         System.out.println("0 - " + arr[0]);
         System.out.println();
         System.out.println("1 - " + arr[1]);
