@@ -1,4 +1,4 @@
-package searchengine.workingWithSite;
+package searchengine.parsing;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -8,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 public class SiteCrawl {
-    public static String[] connect(String url) throws IOException {
+    public static String[] connect2(String url) throws IOException {
         // http://tinkoff-bank-4882.mypublideal.com/online
         //
         //String url = "https://lenta.ru/";
@@ -53,7 +53,7 @@ public class SiteCrawl {
     }
 
     public static void main(String[] args) throws IOException {
-        String[] arr = SiteCrawl.connect("https://lenta.ru/");
+        String[] arr = SiteCrawl.connect2("https://lenta.ru/");
         System.out.println("0 - " + arr[0]);
         System.out.println();
         System.out.println("1 - " + arr[1]);
