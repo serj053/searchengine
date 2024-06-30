@@ -36,6 +36,7 @@ public class StartIndexing {
 
     public List indexing() throws IOException {
         String[] result = SiteCrawl.connect2(sites.get(0).getUrl());
+        //
         SiteDB st = new SiteDB(INDEXING, new Date(), "noError", result[0], result[2]);
         SiteDB sdb = siteRepositories.save(st);
         int id = sdb.getId();
