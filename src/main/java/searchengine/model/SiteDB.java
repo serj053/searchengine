@@ -21,17 +21,12 @@ public class SiteDB {
     private Date statusTime;
     private String lastError;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> dev
     @Column(nullable = false)
     private String url;
     @Column(nullable = false)
     private String name;
 
-<<<<<<< HEAD
-=======
     public int getId() {
         return id;
     }
@@ -80,7 +75,6 @@ public class SiteDB {
         this.name = name;
     }
 
->>>>>>> dev
     public SiteDB() {
     }
 
