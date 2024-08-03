@@ -9,7 +9,8 @@ import searchengine.model.Page;
 import searchengine.model.SiteDB;
 import searchengine.repositories.PageRepositories;
 import searchengine.repositories.SiteRepositories;
-import searchengine.parsing.SiteCrawl;
+import searchengine.workingWithSite.FromSite;
+import searchengine.workingWithSite.SiteReading;
 
 import java.io.IOException;
 import java.util.Date;
@@ -20,8 +21,6 @@ import static searchengine.model.Status.INDEXING;
 @Getter
 @Setter
 @Component
-//связывает со свойствами конфигурационного файла
-//prefix указывает на свойства в конфигурационном файле которые привязываются к объекту
 @ConfigurationProperties(prefix = "indexing-settings")
 public class StartIndexing {
     SiteRepositories siteRepositories;
@@ -35,13 +34,14 @@ public class StartIndexing {
 
 
     public List indexing() throws IOException {
-        String[] result = SiteCrawl.connect2(sites.get(0).getUrl());
-        //
-        SiteDB st = new SiteDB(INDEXING, new Date(), "noError", result[0], result[2]);
-        SiteDB sdb = siteRepositories.save(st);
-        int id = sdb.getId();
-        Page page =new Page(st,result[0], 3,result[1]);
-        pageRepositories.save(page);
+        FromSite.getData(sites.get(2).getUrl(), siteRepositories);
+
+//        String[] result = SiteReading.connect(sites.get(2).getUrl());
+//        SiteDB st = new SiteDB(INDEXING, new Date(), "noError", "Url", "Name");
+//        SiteDB sdb = siteRepositories.save(st);
+//        int id = sdb.getId();
+//        Page page =new Page(st,result[0], 3,result[1]);
+//        pageRepositories.save(page);
 //        for (Site site : sites) {
 //            /*обходим все страницы сайта и добавляем все адреса в базу Page*/
 //            System.out.println(site.getName());
