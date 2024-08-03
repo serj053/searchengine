@@ -14,14 +14,20 @@ public class Page {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     // @Column(name="site_id", nullable = false)
-    @ManyToOne(cascade = CascadeType.ALL )
+    @ManyToOne(cascade = CascadeType.ALL)
     //@JoinColumn(name= "id" )
     private SiteDB site;
     @Column(nullable = false)
     private String path;
     @Column(nullable = false)
     private int code;
+<<<<<<< HEAD
     @Column(columnDefinition = "TEXT", name = "page_content")
+=======
+    //@Column(nullable = false, length=20000)
+    @Column(columnDefinition = "TEXT",
+            name = "page_content")
+>>>>>>> dev
     private String content;
 
     public Page(SiteDB site, String path, int code, String content) {
