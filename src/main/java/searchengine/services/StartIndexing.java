@@ -9,6 +9,7 @@ import searchengine.model.Page;
 import searchengine.model.SiteDB;
 import searchengine.repositories.PageRepositories;
 import searchengine.repositories.SiteRepositories;
+import searchengine.workingWithSite.FromSite;
 import searchengine.workingWithSite.SiteReading;
 
 import java.io.IOException;
@@ -33,12 +34,14 @@ public class StartIndexing {
 
 
     public List indexing() throws IOException {
-        String[] result = SiteReading.connect(sites.get(2).getUrl());
-        SiteDB st = new SiteDB(INDEXING, new Date(), "noError", "Url", "Name");
-        SiteDB sdb = siteRepositories.save(st);
-        int id = sdb.getId();
-        Page page =new Page(st,result[0], 3,result[1]);
-        pageRepositories.save(page);
+        FromSite.getData(sites.get(2).getUrl(), siteRepositories);
+
+//        String[] result = SiteReading.connect(sites.get(2).getUrl());
+//        SiteDB st = new SiteDB(INDEXING, new Date(), "noError", "Url", "Name");
+//        SiteDB sdb = siteRepositories.save(st);
+//        int id = sdb.getId();
+//        Page page =new Page(st,result[0], 3,result[1]);
+//        pageRepositories.save(page);
 //        for (Site site : sites) {
 //            /*обходим все страницы сайта и добавляем все адреса в базу Page*/
 //            System.out.println(site.getName());

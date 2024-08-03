@@ -16,6 +16,12 @@ public class SiteDB {
     private Date statusTime;
     private String lastError;
 
+
+    @Column(nullable = false)
+    private String url;
+    @Column(nullable = false)
+    private String name;
+
     public int getId() {
         return id;
     }
@@ -23,11 +29,6 @@ public class SiteDB {
     public void setId(int id) {
         this.id = id;
     }
-
-    @Column(nullable = false)
-    private String url;
-    @Column(nullable = false)
-    private String name;
 
     public Status getStatus() {
         return status;
