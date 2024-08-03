@@ -20,8 +20,6 @@ public class SiteDB {
     @Column(nullable = false)
     private Date statusTime;
     private String lastError;
-
-
     @Column(nullable = false)
     private String url;
     @Column(nullable = false)
