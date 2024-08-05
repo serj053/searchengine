@@ -2,6 +2,7 @@ package searchengine.workingWithSite;
 
 import org.jboss.logging.Logger;
 import org.springframework.data.repository.support.Repositories;
+import searchengine.repositories.PageRepositories;
 import searchengine.repositories.SiteRepositories;
 
 import java.sql.SQLException;
@@ -9,11 +10,11 @@ import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.ForkJoinPool;
 
 public class FromSite {
-    public static void getData(String url, SiteRepositories repositories) {
+    public static void getData(String url, SiteRepositories siteRepositories, PageRepositories pageRepositories) {
         ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
         int counter = 20;
         Mapping.constantPart = getConstantPart(url);
-        Mapping task = new Mapping(repositories, url, counter);
+        Mapping task = new Mapping(siteRepositories, pageRepositories, url, counter);
         forkJoinPool.invoke(task);
     }
 
@@ -31,7 +32,7 @@ public class FromSite {
         //String url = "https://pythonstart.ru/osnovy/dvumernyy-massiv-v-python-osnovy-raboty";//*
         long start = System.currentTimeMillis();
         int counter = 20;// ограничительный счетчик потоков (загружаемых страниц)
-        Mapping task = new Mapping(null, url, counter);
+        Mapping task = new Mapping(null, null, url, counter);
         FromSite fromSite = new FromSite();
         Mapping.constantPart = fromSite.getConstantPart(url);
 

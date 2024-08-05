@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(indexes = @Index(columnList = "path"))
 public class Page {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     // @Column(name="site_id", nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)
