@@ -34,7 +34,7 @@ public class StartIndexing {
 
 
     public List indexing() throws IOException {
-        FromSite.getData(sites.get(2).getUrl(), siteRepositories);
+        FromSite.getData(sites.get(2).getUrl(), siteRepositories, pageRepositories);
 
 //        String[] result = SiteReading.connect(sites.get(2).getUrl());
 //        SiteDB st = new SiteDB(INDEXING, new Date(), "noError", "Url", "Name");

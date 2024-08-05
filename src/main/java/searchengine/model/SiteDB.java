@@ -1,8 +1,13 @@
 package searchengine.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Date;
 
+@Setter
+@Getter
 @Entity
 public class SiteDB {
 
@@ -15,8 +20,6 @@ public class SiteDB {
     @Column(nullable = false)
     private Date statusTime;
     private String lastError;
-
-
     @Column(nullable = false)
     private String url;
     @Column(nullable = false)

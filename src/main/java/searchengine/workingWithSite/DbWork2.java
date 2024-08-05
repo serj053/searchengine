@@ -6,7 +6,8 @@ public class DbWork2 {
     public Connection connection;
 
     public DbWork2() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/site";//?autoReconnect=true";
+        //String url = "jdbc:mysql://localhost:3306/site";//?autoReconnect=true";
+        String url = "jdbc:mysql://localhost:3306/search_engine2";
         String name = "root";
         String pass = "3141";
         connection = DriverManager.getConnection(url, name, pass);
@@ -14,7 +15,7 @@ public class DbWork2 {
 
     public void get() throws SQLException {
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM information");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM sitedb");
         StringBuilder builder = new StringBuilder();
         while (resultSet.next()) {
             String url = resultSet.getString("url");
@@ -35,7 +36,7 @@ public class DbWork2 {
 //        String pass = "3141";
 //        Connection connection1 = DriverManager.getConnection(url, name, pass);
         Statement statement1 = connection.createStatement();
-        statement1.execute("INSERT INTO information ("
+        statement1.execute("INSERT INTO sitedb ("
                 + columns + ") VALUES(" + values + ");");
         //   statement.close();
         //  connection.close();
@@ -43,27 +44,27 @@ public class DbWork2 {
 
     public void delete(String conditions) throws SQLException {
         Statement statement = connection.createStatement();
-        statement.execute("DELETE FROM information " + conditions);
+        statement.execute("DELETE FROM sitedb " + conditions);
         //   statement.close();
         connection.close();
     }
 
     public void truncate() throws SQLException {
         Statement statement = connection.createStatement();
-        statement.execute("TRUNCATE TABLE information");
+        statement.execute("TRUNCATE TABLE sitedb");
     }
     public void setUtf8mb4() throws SQLException {
         Statement statement = connection.createStatement();
-        statement.execute("alter table site.information" +
+        statement.execute("alter table seach_engine.sitedb" +
                 " convert to character set utf8mb4 collate utf8mb4_unicode_ci");
     }
 
     public static void main(String[] args) throws SQLException {
         DbWork2 db = new DbWork2();
         db.truncate();
-        db.setUtf8mb4();
+//        db.setUtf8mb4();
 //        db.delete("");
-        db.get();
+//        db.get();
         //       db.save("url, name, text", "'url2', 'name2', 'text2'");
 //        String url = "jdbc:mysql://localhost:3306/site";
 //        String name = "root";

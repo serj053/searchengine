@@ -4,10 +4,11 @@ import org.jboss.logging.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import searchengine.model.SiteDB;
+import searchengine.model.Page;
+import searchengine.repositories.PageRepositories;
 import searchengine.repositories.SiteRepositories;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -16,14 +17,18 @@ import java.util.concurrent.RecursiveAction;
 import static searchengine.model.Status.INDEXING;
 
 public class Mapping extends RecursiveAction {
-    SiteRepositories repositories;
-    String url;
+    private final SiteRepositories siteRepositories;
+    private final PageRepositories pageRepositories;
+    private int id;
+    private final String url;
     public static String constantPart;
+    static private boolean flag = true;
     private int counter;
     static private int currentCounter;
 
-    public Mapping(SiteRepositories repositories, String url, int counter) {
-        this.repositories = repositories;
+    public Mapping(SiteRepositories siteRepositories, PageRepositories pageRepositories, String url, int counter) {
+        this.siteRepositories = siteRepositories;
+        this.pageRepositories = pageRepositories;
         this.url = url;
         this.counter = counter;
     }
@@ -40,7 +45,7 @@ public class Mapping extends RecursiveAction {
                 return;
             }
             currentCounter++;
-            if (true/*!urlPool.contains(urlChildren)*/) {
+            if (true) {
                 /*********************************************************/
                 Document document = null;
                 try {
@@ -66,14 +71,26 @@ public class Mapping extends RecursiveAction {
                 String status = "";
                 String statusTime = "";
                 String lastError = "";
-
-                //на основе данных парсинга заполняем сущность SiteDb()
-                SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", url, name);
-                //передаем сущность в репозиторий
-                repositories.save(siteDB);
+                SiteDB sdb = null;
+                if (flag) {
+  //                  Logger.getLogger(Mapping.class.getName()).info("in SiteDB");
+                    //на основе данных парсинга заполняем сущность SiteDb()
+                    SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", url, name);
+                    //передаем сущность в репозиторий
+                    sdb = siteRepositories.save(siteDB);
+                    id = sdb.getId();
+                    flag = false;
+                } else {
+  //                  Logger.getLogger(Mapping.class.getName()).info("in Page");
+                    //на основе данных парсинга заполняем сущность SiteDb()
+                    SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", url, name);
+                    //передаем сущность в репозиторий
+                    Page page = new Page(sdb, "", 3, "TEXT");
+                    pageRepositories.save(page);
+                }
 
                 /*****************************************************************************/
-                Mapping task = new Mapping(repositories, urlChildren, counter);
+                Mapping task = new Mapping(siteRepositories, pageRepositories, urlChildren, counter);
                 task.fork();
                 taskList.add(task);
             }
