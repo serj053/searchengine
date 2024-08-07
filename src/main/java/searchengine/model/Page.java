@@ -14,7 +14,7 @@ public class Page {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     // @Column(name="site_id", nullable = false)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     //@JoinColumn(name= "id" )
     private SiteDB site;
     @Column(nullable = false)

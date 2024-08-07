@@ -2,17 +2,18 @@ package searchengine.workingWithSite;
 
 import org.jboss.logging.Logger;
 import org.springframework.data.repository.support.Repositories;
+import org.springframework.stereotype.Component;
 import searchengine.repositories.PageRepositories;
 import searchengine.repositories.SiteRepositories;
 
 import java.sql.SQLException;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.ForkJoinPool;
-
 public class FromSite {
     public static void getData(String url, SiteRepositories siteRepositories, PageRepositories pageRepositories) {
         ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
-        int counter = 20;
+        int counter = 100;
+        Mapping.currentCounter = 0;
         Mapping.constantPart = getConstantPart(url);
         Mapping task = new Mapping(siteRepositories, pageRepositories, url, counter);
         forkJoinPool.invoke(task);

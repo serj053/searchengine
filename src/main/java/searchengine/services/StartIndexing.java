@@ -35,17 +35,15 @@ public class StartIndexing {
 
     public List indexing() throws IOException {
         FromSite.getData(sites.get(2).getUrl(), siteRepositories, pageRepositories);
-
-//        String[] result = SiteReading.connect(sites.get(2).getUrl());
-//        SiteDB st = new SiteDB(INDEXING, new Date(), "noError", "Url", "Name");
-//        SiteDB sdb = siteRepositories.save(st);
-//        int id = sdb.getId();
-//        Page page =new Page(st,result[0], 3,result[1]);
-//        pageRepositories.save(page);
-//        for (Site site : sites) {
-//            /*РѕР±С…РѕРґРёРј РІСЃРµ СЃС‚СЂР°РЅРёС†С‹ СЃР°Р№С‚Р° Рё РґРѕР±Р°РІР»СЏРµРј РІСЃРµ Р°РґСЂРµСЃР° РІ Р±Р°Р·Сѓ Page*/
-//            System.out.println(site.getName());
-//        }
+        //удаляем все записи из таблицы sitedb и page
+        //siteRepositories.deleteAll();
+        //на основе данных парсинга заполняем сущность SiteDb()
+     //   SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", "url", "name");
+        //передаем сущность в репозиторий
+      //  siteRepositories.save(siteDB);
+     //   Page page = new Page(siteDB, "url", 3, "text");
+      //  pageRepositories.save(page);
+     //   int id = siteDB.getId();
         return sites;
     }
 }

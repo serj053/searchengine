@@ -76,7 +76,7 @@ public class ParseHtml2 {
                     .followRedirects(false);//избегать зацикливания при обработке перенаправлений
             Document document = connection.get();
             Elements elements = document.select("body").select("a");//здесь может быть пусто.
-            Logger.getLogger(ParseHtml2.class.getName()).info("** size elements -  "+ elements.size());
+            // Logger.getLogger(ParseHtml2.class.getName()).info("** size elements -  "+ elements.size());
             for (Element element : elements) {
                 String link = element.absUrl("href");
                 if (isLink(link, constantPart) && !isFile(link)) {
