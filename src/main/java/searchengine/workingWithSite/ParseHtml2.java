@@ -73,7 +73,9 @@ public class ParseHtml2 {
                     //.timeout(100)//Метод timeout() библиотеки Jsoup время ожидания для подключения
                     // к серверу
                     .ignoreContentType(true)//игнорировать тип содержимого документа при анализе
+                    .timeout(100000)
                     .followRedirects(false);//избегать зацикливания при обработке перенаправлений
+
             Document document = connection.get();
             Elements elements = document.select("body").select("a");//здесь может быть пусто.
             // Logger.getLogger(ParseHtml2.class.getName()).info("** size elements -  "+ elements.size());
