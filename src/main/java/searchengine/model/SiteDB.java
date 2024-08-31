@@ -14,14 +14,19 @@ public class SiteDB {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
+
     @Column(nullable = false)
     private Date statusTime;
+
     private String lastError;
+
     @Column(nullable = false)
     private String url;
+
     @Column(nullable = false)
     private String name;
 

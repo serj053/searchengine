@@ -13,14 +13,18 @@ public class Page {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     // @Column(name="site_id", nullable = false)
-    @ManyToOne(cascade = CascadeType.MERGE)
-    //@JoinColumn(name= "id" )
+    @ManyToOne//(cascade = CascadeType.MERGE)
+    @JoinColumn(name= "s_id", nullable = false)
     private SiteDB site;
+
     @Column(nullable = false)
     private String path;
+
     @Column(nullable = false)
     private int code;
+
     //@Column(nullable = false, length=20000)
     @Column(columnDefinition = "TEXT",
             name = "page_content")
