@@ -83,7 +83,7 @@ public class Mapping extends RecursiveAction {
                 //удаляем все записи из таблицы sitedb и page
                 siteRepositories.deleteAll();
                 //на основе данных парсинга заполняем сущность SiteDb()
-                SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", url, name);
+                SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", this.url, name);
                 //передаем сущность в репозиторий
                 sdb = siteRepositories.save(siteDB);
                 //  Page page = new Page(siteDB, url, 3, text);
