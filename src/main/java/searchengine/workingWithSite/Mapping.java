@@ -71,7 +71,7 @@ public class Mapping extends RecursiveAction {
             String name = document.title()
                     .replace("'", "\"")
                     .replace("\\", "");
-            String text = document.body().text().substring(0,10)
+            String text = document.body().text()//.substring(0,10)
                     .replace("'", "\"")
                     .replace("\\", "");
             /************************link to database ************************************/

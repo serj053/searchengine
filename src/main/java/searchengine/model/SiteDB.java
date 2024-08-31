@@ -1,11 +1,13 @@
 package searchengine.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-
+import java.util.List;
+@NoArgsConstructor
 @Setter
 @Getter
 @Entity
@@ -29,6 +31,9 @@ public class SiteDB {
 
     @Column(nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "site", cascade = CascadeType.ALL)
+    private List<Page> pages;
 
     public int getId() {
         return id;
@@ -76,9 +81,6 @@ public class SiteDB {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public SiteDB() {
     }
 
     public SiteDB(Status status, Date statusTime, String lastError, String url, String name) {

@@ -1,14 +1,15 @@
 package searchengine.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
+@NoArgsConstructor
 @Setter
 @Getter
 @Entity
-@Table(indexes = @Index(columnList = "path"))//проиндексировать столбец path
+@Table(indexes = @Index(columnList = "path"))//РїСЂРѕРёРЅРґРµРєСЃРёСЂРѕРІР°С‚СЊ СЃС‚РѕР»Р±РµС† path
 public class Page {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -30,8 +30,8 @@ public class StartIndexing {
 
     public List indexing() throws IOException {
       //  for(Site s: sites){
-            Logger.getLogger(StartIndexing.class.getName()).info("site is " + sites.get(1).toString());
-            LetsParsing.getData(sites.get(1).getUrl(), siteRepositories, pageRepositories);
+            Logger.getLogger(StartIndexing.class.getName()).info("site is " + sites.get(0).toString());
+            LetsParsing.getData(sites.get(0).getUrl(), siteRepositories, pageRepositories);
      //   }
 
         //удаляем все записи из таблицы sitedb и page
