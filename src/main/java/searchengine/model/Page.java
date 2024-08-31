@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(indexes = @Index(columnList = "path"))
+@Table(indexes = @Index(columnList = "path"))//проиндексировать столбец path
 public class Page {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
