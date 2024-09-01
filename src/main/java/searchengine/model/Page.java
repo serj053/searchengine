@@ -27,7 +27,7 @@ public class Page {
     private int code;
 
     //@Column(nullable = false, length=20000)
-    @Column(columnDefinition = "TEXT",
+    @Column(columnDefinition = "LONGTEXT",
             name = "page_content")
     private String content;
 

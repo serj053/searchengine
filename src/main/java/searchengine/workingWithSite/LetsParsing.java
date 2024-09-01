@@ -9,10 +9,12 @@ import java.util.concurrent.ForkJoinPool;
 public class LetsParsing {
     public static void getData(String url, SiteRepositories siteRepositories, PageRepositories pageRepositories) {
         ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+        Mapping.siteRepositories = siteRepositories;
+        Mapping.pageRepositories = pageRepositories;
         int counter = 100;
         Mapping.currentCounter = 0;
         Mapping.constantPart = getConstantPart(url);
-        Mapping task = new Mapping(siteRepositories, pageRepositories, url, counter);
+        Mapping task = new Mapping(url, counter);
         forkJoinPool.invoke(task);
     }
 
@@ -30,7 +32,7 @@ public class LetsParsing {
         //String url = "https://pythonstart.ru/osnovy/dvumernyy-massiv-v-python-osnovy-raboty";//*
         long start = System.currentTimeMillis();
         int counter = 20;// ограничительный счетчик потоков (загружаемых страниц)
-        Mapping task = new Mapping(null, null, url, counter);
+        Mapping task = new Mapping(url, counter);
         LetsParsing letsParsing = new LetsParsing();
         Mapping.constantPart = letsParsing.getConstantPart(url);
 
