@@ -128,7 +128,6 @@ public class Mapping extends RecursiveAction {
         String status = "";
         String statusTime = "";
         String lastError = "";
-        //SiteDB sdb = null;
         if (flag) {
             //удаляем все записи из таблицы sitedb и page
             siteRepositories.deleteAll();
