@@ -6,8 +6,10 @@ import searchengine.repositories.SiteRepositories;
 import java.sql.SQLException;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.ForkJoinPool;
+
 public class LetsParsing {
     public static void getData(String url, SiteRepositories siteRepositories, PageRepositories pageRepositories) {
+        long start = System.currentTimeMillis();
         ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
         Mapping.siteRepositories = siteRepositories;
         Mapping.pageRepositories = pageRepositories;
@@ -16,6 +18,7 @@ public class LetsParsing {
         Mapping.constantPart = getConstantPart(url);
         Mapping task = new Mapping(url, counter);
         forkJoinPool.invoke(task);
+        System.out.println("*** parsing time is - " + (System.currentTimeMillis() - start) / 1000);
     }
 
     public static void main(String[] args) throws SQLException {

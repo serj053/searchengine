@@ -12,6 +12,7 @@ import searchengine.repositories.SiteRepositories;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -22,18 +23,18 @@ import static searchengine.model.Status.INDEXING;
 public class Mapping extends RecursiveAction {
     public static SiteRepositories siteRepositories;
     public static PageRepositories pageRepositories;
-    private int id;
-    private String url;
-    public static String constantPart;
-    static private boolean flag = true;
-    private int counter;
     static int currentCounter;
     static SiteDB sdb;
+    static private boolean flag = true;
+    private int id;
+    private String url;
+    private int counter;
+    public static String constantPart;
 
     public Mapping(String url, int counter) {
         if (flag) {
             this.url = getDataFromSite(url);
-        }else{
+        } else {
             this.url = url;
         }
         this.counter = counter;
@@ -48,11 +49,10 @@ public class Mapping extends RecursiveAction {
         tempList = ph.getLinks(url, constantPart);//получаем все ссылки со страницы
 
         for (String urlChildren : tempList) {
-            if (currentCounter > counter) {
-                return;
-            }
-            currentCounter++;
-            /*********************************************************/
+//            if (currentCounter > counter) {
+//                return;
+//            }
+//            currentCounter++;
             Document document = null;
             try {
                 document = Jsoup.connect(urlChildren)
@@ -64,7 +64,8 @@ public class Mapping extends RecursiveAction {
                         .ignoreContentType(true)
                         .get();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                // Logger.getLogger(Mapping.class.getName()).info("***  "+url +" body().text() is null");
+                throw new RuntimeException("***  " + urlChildren + "  " + e);
             }
             String url = urlChildren
                     .replace("'", "\"")
@@ -72,28 +73,25 @@ public class Mapping extends RecursiveAction {
             String name = document.title()
                     .replace("'", "\"")
                     .replace("\\", "");
-            String text = document.body().text()//.substring(0,10)
-                    .replace("'", "\"")
-                    .replace("\\", "");
-            /************************link to database ************************************/
-            String status = "";
-            String statusTime = "";
-            String lastError = "";
-            //SiteDB sdb = null;
-
-            //на основе данных парсинга заполняем сущность SiteDb()
-            //SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", url, name);
-            //передаем сущность в репозиторий
-            Optional<SiteDB> opt = siteRepositories.findById(id);
-            SiteDB sdb1 = null;
-            if (opt.isPresent()) {
-                sdb1 = opt.get();
+            String text;
+            Optional<String> textOpt = Optional.ofNullable(document.body().text());
+            if (textOpt.isPresent()) {
+                text = document.body().text()
+                        .replace("'", "\"")
+                        .replace("\\", "");
+            } else {
+                continue;
             }
-            //   SiteDB sdb2 = new SiteDB(INDEXING, new Date(), "noError", url, name);
             Page page = new Page(sdb, url, 3, text);
-            pageRepositories.save(page);
 
-            /*****************************************************************************/
+            List<Page> page1 = pageRepositories.findByPath(url);
+            if(page1.size() != 0){
+                continue;
+            }
+//            Logger.getLogger(Mapping.class.getName()).info("path - "
+//                    + ((page1 != null ? page1.getPath() : "null")));
+
+            pageRepositories.save(page);
             Mapping task = new Mapping(urlChildren, counter);
             task.fork();
             taskList.add(task);
@@ -128,16 +126,14 @@ public class Mapping extends RecursiveAction {
         String status = "";
         String statusTime = "";
         String lastError = "";
-        if (flag) {
-            //удаляем все записи из таблицы sitedb и page
-            siteRepositories.deleteAll();
-            pageRepositories.deleteAll();
-            //на основе данных парсинга заполняем сущность SiteDb()
-            SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", urlForDB, nameForDB);
-            //передаем сущность в репозиторий
-            sdb = siteRepositories.save(siteDB);
-            flag = false;
-        }
+        //удаляем все записи из таблицы sitedb и page
+        siteRepositories.deleteAll();
+        pageRepositories.deleteAll();
+        //на основе данных парсинга заполняем сущность SiteDb()
+        SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", urlForDB, nameForDB);
+        //передаем сущность в репозиторий
+        sdb = siteRepositories.save(siteDB);
+        flag = false;
         return url;
     }
 }

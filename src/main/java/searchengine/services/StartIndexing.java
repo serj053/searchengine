@@ -29,20 +29,23 @@ public class StartIndexing {
 
 
     public List indexing() throws IOException {
-      //  for(Site s: sites){
-            Logger.getLogger(StartIndexing.class.getName()).info("site is " + sites.get(1).toString());
-            LetsParsing.getData(sites.get(1).getUrl(), siteRepositories, pageRepositories);
-     //   }
+        //  for(Site s: sites){
+        Logger.getLogger(StartIndexing.class.getName()).info("site is " + sites.get(1).toString());
+        LetsParsing.getData(sites.get(1).getUrl(), siteRepositories, pageRepositories);
+//        new Thread(() -> {
+//            LetsParsing.getData(sites.get(0).getUrl(), siteRepositories, pageRepositories);
+//        }).start();
+        //   }
 
         //удаляем все записи из таблицы sitedb и page
         //siteRepositories.deleteAll();
         //на основе данных парсинга заполняем сущность SiteDb()
-     //   SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", "url", "name");
+        //   SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", "url", "name");
         //передаем сущность в репозиторий
-      //  siteRepositories.save(siteDB);
-     //   Page page = new Page(siteDB, "url", 3, "text");
-      //  pageRepositories.save(page);
-     //   int id = siteDB.getId();
+        //  siteRepositories.save(siteDB);
+        //   Page page = new Page(siteDB, "url", 3, "text");
+        //  pageRepositories.save(page);
+        //   int id = siteDB.getId();
         return sites;
     }
 }

@@ -8,6 +8,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.logging.Logger;
 
@@ -54,7 +55,6 @@ public class ParseHtml2 {
                 || link.contains(".pptx")
                 || link.contains(".docx")
                 || link.contains("?_ga");
-
     }
 
     //ConcurrentSkipListSet -это класс из библиотеки Java, представляющий собой
@@ -78,10 +78,11 @@ public class ParseHtml2 {
 
             Document document = connection.get();
             Elements elements = document.select("body").select("a");//здесь может быть пусто.
-            // Logger.getLogger(ParseHtml2.class.getName()).info("** size elements -  "+ elements.size());
+            // Logger.getLogger(ParseHtml2.class.getName()).info("***  url "+url+ "** size elements -  "+ elements.size());
+          // elements.
             for (Element element : elements) {
                 String link = element.absUrl("href");
-                if (isLink(link, constantPart) && !isFile(link)) {
+                if (isLink(link, constantPart) && !isFile(link) && !Objects.equals(element.absUrl("href"), url)) {
                     links.add(link);
                 }
             }

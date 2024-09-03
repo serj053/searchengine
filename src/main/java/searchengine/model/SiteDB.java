@@ -3,6 +3,7 @@ package searchengine.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,6 +22,7 @@ public class SiteDB {
     @Column(nullable = false)
     private Status status;
 
+    @CreationTimestamp//автоматически устанавливается время создания записи в базе
     @Column(nullable = false)
     private Date statusTime;
 
