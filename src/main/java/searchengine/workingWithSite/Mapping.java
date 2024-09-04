@@ -36,6 +36,7 @@ public class Mapping extends RecursiveAction {
             this.url = getDataFromSite(url);
         } else {
             this.url = url;
+
         }
         this.counter = counter;
     }
@@ -92,6 +93,7 @@ public class Mapping extends RecursiveAction {
 //                    + ((page1 != null ? page1.getPath() : "null")));
 
             pageRepositories.save(page);
+            siteRepositories.statusTime(new Date());
             Mapping task = new Mapping(urlChildren, counter);
             task.fork();
             taskList.add(task);

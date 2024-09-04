@@ -22,7 +22,7 @@ public class SiteDB {
     @Column(nullable = false)
     private Status status;
 
-    @CreationTimestamp//автоматически устанавливается время создания записи в базе
+   // @CreationTimestamp//Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ РІСЂРµРјСЏ СЃРѕР·РґР°РЅРёСЏ Р·Р°РїРёСЃРё РІ Р±Р°Р·Рµ
     @Column(nullable = false)
     private Date statusTime;
 
