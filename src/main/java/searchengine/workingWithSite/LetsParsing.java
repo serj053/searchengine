@@ -35,7 +35,7 @@ public class LetsParsing {
         //String url = "https://pythonstart.ru/osnovy/dvumernyy-massiv-v-python-osnovy-raboty";//*
         long start = System.currentTimeMillis();
         int counter = 20;// ограничительный счетчик потоков (загружаемых страниц)
-        Mapping task = new Mapping(url, counter, null);
+        Mapping task = new Mapping(url, counter, null, true);
         LetsParsing letsParsing = new LetsParsing();
         Mapping.constantPart = letsParsing.getConstantPart(url);
 
