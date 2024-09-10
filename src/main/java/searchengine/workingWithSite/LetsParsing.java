@@ -16,7 +16,7 @@ public class LetsParsing {
         int counter = 100;
         Mapping.currentCounter = 0;
         Mapping.constantPart = getConstantPart(url);
-        Mapping task = new Mapping(url, counter);
+        Mapping task = new Mapping(url, counter, null, true);
         forkJoinPool.invoke(task);
         System.out.println("*** parsing time is - " + (System.currentTimeMillis() - start) / 1000);
     }
@@ -35,7 +35,7 @@ public class LetsParsing {
         //String url = "https://pythonstart.ru/osnovy/dvumernyy-massiv-v-python-osnovy-raboty";//*
         long start = System.currentTimeMillis();
         int counter = 20;// ограничительный счетчик потоков (загружаемых страниц)
-        Mapping task = new Mapping(url, counter);
+        Mapping task = new Mapping(url, counter, null);
         LetsParsing letsParsing = new LetsParsing();
         Mapping.constantPart = letsParsing.getConstantPart(url);
 
