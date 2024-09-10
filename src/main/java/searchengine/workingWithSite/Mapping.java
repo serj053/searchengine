@@ -36,7 +36,6 @@ public class Mapping extends RecursiveAction {
             this.url = getDataFromSite(url);
         } else {
             this.url = url;
-
         }
         this.counter = counter;
     }
@@ -50,14 +49,16 @@ public class Mapping extends RecursiveAction {
         tempList = ph.getLinks(url, constantPart);//получаем все ссылки со страницы
 
         for (String urlChildren : tempList) {
+
 //            if (currentCounter > counter) {
 //                return;
 //            }
 //            currentCounter++;
+
             Document document = null;
             try {
                 document = Jsoup.connect(urlChildren)
-                        .timeout(100000)
+         //               .timeout(100000)
                         .followRedirects(false)
                         .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
                         .referrer("http://www.google.com")
@@ -69,9 +70,6 @@ public class Mapping extends RecursiveAction {
                 throw new RuntimeException("***  " + urlChildren + "  " + e);
             }
             String url = urlChildren
-                    .replace("'", "\"")
-                    .replace("\\", "");
-            String name = document.title()
                     .replace("'", "\"")
                     .replace("\\", "");
             String text;
@@ -86,14 +84,13 @@ public class Mapping extends RecursiveAction {
             Page page = new Page(sdb, url, 3, text);
 
             List<Page> page1 = pageRepositories.findByPath(url);
-            if(page1.size() != 0){
+            if(!page1.isEmpty()){
                 continue;
             }
 //            Logger.getLogger(Mapping.class.getName()).info("path - "
 //                    + ((page1 != null ? page1.getPath() : "null")));
 
             pageRepositories.save(page);
-            siteRepositories.statusTime(new Date());
             Mapping task = new Mapping(urlChildren, counter);
             task.fork();
             taskList.add(task);
@@ -108,7 +105,7 @@ public class Mapping extends RecursiveAction {
         Document document = null;
         try {
             document = Jsoup.connect(url)
-                    .timeout(100000)
+      //              .timeout(100000)
                     .followRedirects(false)
                     .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
                     .referrer("http://www.google.com")

@@ -64,7 +64,7 @@ public class ParseHtml2 {
     public ConcurrentSkipListSet<String> getLinks(String url, String constantPart) {
         links = new ConcurrentSkipListSet<>();
         try {
-            sleep(150);//выдерживать паузы между потоками обращения к этому методу
+            sleep(100);//выдерживать паузы между потоками обращения к этому методу
             // (с помощью метода sleep() у потока), (чтобы сайт не заблокировал доступ приложения ?)
             Connection connection = Jsoup.connect(url)
                     .ignoreHttpErrors(true)//игнорировать ошибки HTTP, которые могут возникнуть
@@ -73,7 +73,7 @@ public class ParseHtml2 {
                     .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
                     .referrer("http://www.google.com")
                     .ignoreContentType(true)//игнорировать тип содержимого документа при анализе
-                    .timeout(100000) //библиотеки Jsoup время ожидания для подключения
+     //               .timeout(100000) //библиотеки Jsoup время ожидания для подключения
                     .followRedirects(false);//избегать зацикливания при обработке перенаправлений
 
             Document document = connection.get();
@@ -82,7 +82,8 @@ public class ParseHtml2 {
           // elements.
             for (Element element : elements) {
                 String link = element.absUrl("href");
-                if (isLink(link, constantPart) && !isFile(link) && !Objects.equals(element.absUrl("href"), url)) {
+                if (isLink(link, constantPart) && !isFile(link)
+                        && !Objects.equals(element.absUrl("href"), url)) {
                     links.add(link);
                 }
             }

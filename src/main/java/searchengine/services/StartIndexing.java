@@ -37,11 +37,11 @@ public class StartIndexing {
 //        }).start();
         //   }
 
-        //удаляем все записи из таблицы sitedb и page
+        //СѓРґР°Р»СЏРµРј РІСЃРµ Р·Р°РїРёСЃРё РёР· С‚Р°Р±Р»РёС†С‹ sitedb Рё page
         //siteRepositories.deleteAll();
-        //на основе данных парсинга заполняем сущность SiteDb()
+        //РЅР° РѕСЃРЅРѕРІРµ РґР°РЅРЅС‹С… РїР°СЂСЃРёРЅРіР° Р·Р°РїРѕР»РЅСЏРµРј СЃСѓС‰РЅРѕСЃС‚СЊ SiteDb()
         //   SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", "url", "name");
-        //передаем сущность в репозиторий
+        //РїРµСЂРµРґР°РµРј СЃСѓС‰РЅРѕСЃС‚СЊ РІ СЂРµРїРѕР·РёС‚РѕСЂРёР№
         //  siteRepositories.save(siteDB);
         //   Page page = new Page(siteDB, "url", 3, "text");
         //  pageRepositories.save(page);
