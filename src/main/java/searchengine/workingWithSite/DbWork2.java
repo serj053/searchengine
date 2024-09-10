@@ -7,7 +7,7 @@ public class DbWork2 {
 
     public DbWork2() throws SQLException {
         //String url = "jdbc:mysql://localhost:3306/site";//?autoReconnect=true";
-        String url = "jdbc:mysql://localhost:3306/search_engine2";
+        String url = "jdbc:mysql://localhost:3306/search_engine";
         String name = "root";
         String pass = "3141";
         connection = DriverManager.getConnection(url, name, pass);
@@ -41,6 +41,10 @@ public class DbWork2 {
         //   statement.close();
         //  connection.close();
     }
+    public void getCurrentTime() throws SQLException {
+        Statement statement = connection.createStatement();
+        statement.execute("UPDATE sitedb set status_time = NOW()");
+    }
 
     public void delete(String conditions) throws SQLException {
         Statement statement = connection.createStatement();
@@ -60,8 +64,8 @@ public class DbWork2 {
     }
 
     public static void main(String[] args) throws SQLException {
-        DbWork2 db = new DbWork2();
-        db.truncate();
+        DbWork2 db = new DbWork2();//       db.truncate();
+        db.getCurrentTime();
 //        db.setUtf8mb4();
 //        db.delete("");
 //        db.get();

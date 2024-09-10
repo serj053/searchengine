@@ -11,6 +11,7 @@ import searchengine.repositories.PageRepositories;
 import searchengine.repositories.SiteRepositories;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -32,14 +33,14 @@ public class Mapping extends RecursiveAction {
     public static String constantPart;
 
     public Mapping(String url, int counter, SiteDB sdb, boolean flag) {
+        this.flag = flag;
+        this.sdb = sdb;
         if (flag) {
             this.url = getDataFromSite(url);
         } else {
             this.url = url;
         }
         this.counter = counter;
-        this.sdb = sdb;
-        this.flag = flag;
     }
 
     @Override
@@ -60,7 +61,7 @@ public class Mapping extends RecursiveAction {
             Document document = null;
             try {
                 document = Jsoup.connect(urlChildren)
-                        //               .timeout(100000)
+                        .timeout(100000)
                         .followRedirects(false)
                         .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
                         .referrer("http://www.google.com")
@@ -89,10 +90,13 @@ public class Mapping extends RecursiveAction {
             if (!page1.isEmpty()) {
                 continue;
             }
-//            Logger.getLogger(Mapping.class.getName()).info("path - "
-//                    + ((page1 != null ? page1.getPath() : "null")));
-
             pageRepositories.save(page);
+            try {
+                DbWork2 nativeDB = new DbWork2();
+                nativeDB.getCurrentTime();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             Mapping task = new Mapping(urlChildren, counter, sdb, flag);
             task.fork();
             taskList.add(task);

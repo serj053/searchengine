@@ -20,7 +20,7 @@ public class Page {
     @JoinColumn(name= "s_id", nullable = false)
     private SiteDB site;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "VARCHAR(512)", nullable = false)
     private String path;
 
     @Column(nullable = false)

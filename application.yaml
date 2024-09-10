@@ -1,13 +1,13 @@
 indexing-settings:
   sites:
-    - url: https://lenta.ru
-      name: Лента.ру
+    - url: https://ipfran.ru/
+      name: Ипфран.ру
     - url: https://skillbox.ru
       name: Skillbox
     - url: https://playback.ru
       name: PlayBack.Ru
-    - url: https://https://proselyte.net
-      name: Proselyte.net
+    - url: https://www.svetlovka.ru/
+      name: Светловка.ру
 
 someParameter: 3322
 
