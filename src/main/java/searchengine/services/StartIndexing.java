@@ -28,14 +28,15 @@ public class StartIndexing {
     }
 
 
-    public List indexing() throws IOException {
-        //  for(Site s: sites){
+    public List indexing() throws IOException, InterruptedException {
+          for(Site s: sites){
 //        Logger.getLogger(StartIndexing.class.getName()).info("site is " + sites.get(0).toString());
 //        LetsParsing.getData(sites.get(0).getUrl(), siteRepositories, pageRepositories);
         new Thread(() -> {
-            LetsParsing.getData(sites.get(1).getUrl(), siteRepositories, pageRepositories);
+            LetsParsing.getData(s.getUrl(), siteRepositories, pageRepositories);
         }).start();
-//           }
+        Thread.sleep(200);
+           }
 
         //удаляем все записи из таблицы sitedb и page
         //siteRepositories.deleteAll();

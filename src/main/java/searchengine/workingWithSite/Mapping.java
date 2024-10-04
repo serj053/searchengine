@@ -33,6 +33,7 @@ public class Mapping extends RecursiveAction {
     public static String constantPart;
 
     public Mapping(String url, int counter, SiteDB sdb, boolean flag) {
+        Logger.getLogger(Mapping.class.getName()).info("url: "+url + "   sdb: " + sdb + "   flag: " + flag);
         this.flag = flag;
         this.sdb = sdb;
         if (flag) {
@@ -53,10 +54,10 @@ public class Mapping extends RecursiveAction {
 
         for (String urlChildren : tempList) {
 
-//            if (currentCounter > counter) {
-//                return;
-//            }
-//            currentCounter++;
+            if (currentCounter > counter) {
+                return;
+            }
+            currentCounter++;
 
             Document document = null;
             try {
@@ -70,7 +71,7 @@ public class Mapping extends RecursiveAction {
                         .get();
             } catch (IOException e) {
                 // Logger.getLogger(Mapping.class.getName()).info("***  "+url +" body().text() is null");
-                throw new RuntimeException("***  " + urlChildren + "  " + e);
+                throw new RuntimeException("***  ошибочный url " + urlChildren + "  " + e);
             }
             String url = urlChildren
                     .replace("'", "\"")
@@ -91,12 +92,12 @@ public class Mapping extends RecursiveAction {
                 continue;
             }
             pageRepositories.save(page);
-            try {
-                DbWork2 nativeDB = new DbWork2();
-                nativeDB.getCurrentTime();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+//            try {
+//                DbWork2 nativeDB = new DbWork2();
+//                nativeDB.getCurrentTime();
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
             Mapping task = new Mapping(urlChildren, counter, sdb, flag);
             task.fork();
             taskList.add(task);

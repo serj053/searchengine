@@ -32,7 +32,7 @@ public class ApiController {
     }
 
     @GetMapping("/startIndexing")
-    public List startIndexing() throws IOException {
+    public List startIndexing() throws IOException, InterruptedException {
         return startIndexing.indexing();
     }
 
