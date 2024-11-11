@@ -11,6 +11,7 @@ public class Mapping2 extends RecursiveAction {
 
     public Mapping2(String url) {
         this.url = url.endsWith("/") ? url : new StringBuilder(url).append("/").toString();
+        System.out.println(urlStorage.size());
     }
 
     @Override
@@ -30,12 +31,14 @@ public class Mapping2 extends RecursiveAction {
     }
 
 
-
-
     public static void main(String[] args) {
         String url = "https://skillbox.ru";
         Mapping2 mapping2 = new Mapping2(url);
+        long start = System.currentTimeMillis();
         mapping2.compute();
+
+        System.out.println("время парсинга - "
+                + (System.currentTimeMillis() - start) / 1000 + " секунд");
 
     }
 
