@@ -23,6 +23,9 @@ public class Mapping2 extends RecursiveAction {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        if(listTransfer.isEmpty()){
+            return;
+        }
         for (String urlTemp : listTransfer) {
             System.out.println(urlTemp);
             Mapping2 task = new Mapping2(urlTemp);
