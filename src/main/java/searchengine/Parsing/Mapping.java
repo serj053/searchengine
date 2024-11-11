@@ -1,17 +1,14 @@
-package searchengine.workingWithSite;
+package searchengine.Parsing;
 
 import org.jboss.logging.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 import searchengine.model.SiteDB;
 import searchengine.model.Page;
 import searchengine.repositories.PageRepositories;
 import searchengine.repositories.SiteRepositories;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +30,7 @@ public class Mapping extends RecursiveAction {
     public static String constantPart;
 
     public Mapping(String url, int counter, SiteDB sdb, boolean flag) {
-        Logger.getLogger(Mapping.class.getName()).info("url: "+url + "   sdb: " + sdb + "   flag: " + flag);
+        Logger.getLogger(Mapping.class.getName()).info("url: " + url + "   sdb: " + sdb + "   flag: " + flag);
         this.flag = flag;
         this.sdb = sdb;
         if (flag) {
@@ -46,6 +43,10 @@ public class Mapping extends RecursiveAction {
 
     @Override
     protected void compute() {
+        if (currentCounter > counter) {
+            return;
+        }
+        currentCounter++;
 
         ConcurrentSkipListSet<String> tempList;//временный список для переноса ссылок
         CopyOnWriteArrayList<Mapping> taskList = new CopyOnWriteArrayList<>();
@@ -53,12 +54,6 @@ public class Mapping extends RecursiveAction {
         tempList = ph.getLinks(url, constantPart);//получаем все ссылки со страницы
 
         for (String urlChildren : tempList) {
-
-            if (currentCounter > counter) {
-                return;
-            }
-            currentCounter++;
-
             Document document = null;
             try {
                 document = Jsoup.connect(urlChildren)
@@ -132,9 +127,9 @@ public class Mapping extends RecursiveAction {
         String status = "";
         String statusTime = "";
         String lastError = "";
-        //удаляем все записи из таблицы sitedb и page
-        siteRepositories.deleteAll();
-        pageRepositories.deleteAll();
+//        //удаляем все записи из таблицы sitedb и page
+//        pageRepositories.deleteAll();
+//        siteRepositories.deleteAll();
         //на основе данных парсинга заполняем сущность SiteDb()
         SiteDB siteDB = new SiteDB(INDEXING, new Date(), "noError", urlForDB, nameForDB);
         //передаем сущность в репозиторий

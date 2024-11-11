@@ -1,4 +1,4 @@
-package searchengine.workingWithSite;
+package searchengine.Parsing;
 
 import searchengine.repositories.PageRepositories;
 import searchengine.repositories.SiteRepositories;
@@ -13,6 +13,9 @@ public class LetsParsing {
         ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
         Mapping.siteRepositories = siteRepositories;
         Mapping.pageRepositories = pageRepositories;
+        //удаляем все записи из таблицы sitedb и page
+//        pageRepositories.deleteAll();
+//        siteRepositories.deleteAll();
         int counter = 100;
         Mapping.currentCounter = 0;
         Mapping.constantPart = getConstantPart(url);

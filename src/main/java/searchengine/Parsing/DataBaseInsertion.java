@@ -1,4 +1,4 @@
-package searchengine.workingWithSite;
+package searchengine.Parsing;
 
 import java.io.IOException;
 
