@@ -11,7 +11,7 @@ public class Mapping2 extends RecursiveAction {
 
     public Mapping2(String url) {
         this.url = url.endsWith("/") ? url : new StringBuilder(url).append("/").toString();
-        System.out.println(urlStorage.size());
+        System.out.println("storage  " + urlStorage.size());
     }
 
     @Override
@@ -23,7 +23,7 @@ public class Mapping2 extends RecursiveAction {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if(listTransfer.isEmpty()){
+        if (listTransfer.isEmpty()) {
             return;
         }
         for (String urlTemp : listTransfer) {
@@ -35,7 +35,7 @@ public class Mapping2 extends RecursiveAction {
 
 
     public static void main(String[] args) {
-        String url = "https://skillbox.ru";
+        String url = "https://www.svetlovka.ru/";
         Mapping2 mapping2 = new Mapping2(url);
         long start = System.currentTimeMillis();
         mapping2.compute();
@@ -46,3 +46,6 @@ public class Mapping2 extends RecursiveAction {
     }
 
 }
+/*
+ * https://rw6ase.narod.ru/index1/konstr/rk_ak_ustr/_rk_ak_ustr.html
+ * */

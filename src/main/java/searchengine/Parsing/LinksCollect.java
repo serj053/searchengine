@@ -13,9 +13,9 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 
 public class LinksCollect {
-
-    String constantPart = "skillbox";
-    String regex = "http[s]?://" + constantPart + "\\.ru[^#,\\s]*";
+//https://www.youtube.com/
+    String constantPart = "svetlovka";
+    String regex = "http[s]?://\\w*." + constantPart + ".ru\\/[^#,\\s]*";
 
     public Set<String> urlGetting(String url, ConcurrentSkipListSet<String> urlStorage) throws IOException {
         Set<String> list = new HashSet<>();
